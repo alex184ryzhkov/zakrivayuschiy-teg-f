@@ -1,1 +1,19 @@
-/* В этом файле будут храниться все значения переменных в исходном состоянии, а так же их изменения в зависимости от ширины устройства */
+:root {
+    --main-font: 'Inter';
+    --accent-font: 'PressStart2P';
+
+    --main-font-weight: 410;
+    --title-font-weight: 715;
+
+    --page-bg-gradient: repeating-linear-gradient(90deg, #d3d3d3 0px, #d3d3d3 2px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(180deg, #d3d3d3 0px, #d3d3d3 2px, transparent 2px, transparent 4px),
+    linear-gradient(180deg, #e7e7e7 0%, #e7e7e7 0.01%, #1a1a1a 100%);
+
+    /* Цвета */
+    --text-color: #000;
+    --border-color: rgba(0, 0, 0, 0.1);
+    --label-stroke-color: #fff;
+
+    /*Карточка*/
+    --card-width: 700px;
+}

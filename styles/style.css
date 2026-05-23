@@ -1,16 +1,344 @@
-/* Здесь вы напишете основную часть стилей страницы.
-
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-
-*/
-
-.page {
-  min-inline-size: 320px;
-  min-block-size: 100dvb;
+@supports (text-stroke: 1px var(--label-stroke-color)) or (-webkit-text-stroke: 1px var(--label-stroke-color)) {
+    .card__label {
+        -webkit-text-stroke: 1px var(--label-stroke-color);
+        text-stroke: 1px var(--label-stroke-color);
+        text-shadow: none;
+    }
 }
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- Резиновая обёртка ---------- */
+.container {
+    --container-width: clamp(320px, 90%, 1200px);
+    width: var(--container-width);
+    margin: 0 auto;
+}
+
+/* ---------- Общие стили для страницы ---------- */
+.page {
+    font-family: var(--main-font), sans-serif;
+    font-variation-settings: 'wght' var(--main-font-weight);
+    background-image: var(--page-bg-gradient);
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+/* ---------- Шапка ---------- */
+.header {
+    /*padding-bottom: clamp(20px, 5vw, 40px);*/
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+}
+
+.header__content {
+    border: 2px solid #000;
+    width: 700px;
+    height: 368px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ffffff;
+    padding: 16px 24px;
+    box-sizing: border-box;
+}
+
+.header__content.container {
+    margin: 100px auto 0 auto;
+}
+
+.logo {
+    font-family: var(--accent-font), sans-serif;
+    font-weight: 400;
+    font-size: clamp(2rem, 10vw, 4.0625rem); /* 65px = 4.0625rem */
+    text-transform: uppercase;
+    color: var(--text-color);
+    line-height: 1.2;
+}
+
+.header__title {
+    font-family: var(--accent-font), sans-serif;
+    font-weight: 400;
+    font-size: clamp(1rem, 5vw, 1.4375rem); /* 23px = 1.4375rem */
+    text-transform: uppercase;
+    color: var(--text-color);
+    margin: 0;
+    line-height: 1.3;
+}
+
+/* ---------- Карточка ---------- */
+.cards {
+    margin-top: 98px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+}
+
+.card {
+    width: var(--card-width, 700px);
+    background-color: #fff;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+    border: 2px solid #000;
+}
+
+.card__title {
+    font-family: var(--main-font), sans-serif;
+    font-weight: var(--title-font-weight);
+    font-variation-settings: 'wght' var(--title-font-weight);
+    font-size: 18px;
+    padding-block: 5px;
+    padding-inline: 10px;
+    margin: 0;
+}
+
+.card__image {
+    width: 100%;
+    padding-bottom: 25px;
+}
+
+.card__image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.card__content {
+    padding: 0 clamp(16px, 4vw, 24px) clamp(20px, 5vw, 32px);
+}
+
+.card__description {
+    font-family: var(--main-font), sans-serif;
+    font-weight: var(--main-font-weight);
+    font-variation-settings: 'wght' var(--main-font-weight);
+    font-size: 18px;
+    line-height: 117%;
+    padding: 0 25px 25px 25px;
+}
+
+.card__actions {
+    display: flex;
+    align-items: center;
+    gap: clamp(12px, 3vw, 20px);
+}
+
+.card__like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-color);
+    transition: transform 0.2s ease;
+}
+
+.heart-icon {
+    width: clamp(24px, 5vw, 32px);
+    height: auto;
+}
+
+.card__buttons-group {
+    display: flex;
+    gap: clamp(8px, 2vw, 12px);
+    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+.button {
+    background: transparent;
+    border: 2px solid var(--text-color);
+    padding-block: 9px;
+    padding-inline: 17px;
+    width: 130px;
+    height: 38px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.button__text {
+    font-family: var(--accent-font), sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 90%;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.card__image-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.card__image-wrapper .card__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0;
+}
+
+/*-----------Лайбл---------------*/
+.card__label {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    font-family: var(--accent-font), sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #000;
+    opacity: 0.5;
+    mix-blend-mode: hard-light;
+    pointer-events: none;
+    text-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+
+/* ---------- Дополнительная кнопка после карточек ---------- */
+.extra-button-container {
+    display: flex;
+    justify-content: center;
+    /*margin: 0 0 100px;*/
+}
+
+/* ---------- Модальное окно ---------- */
+.modal-dialog {
+    border: 2px solid #000;
+    padding: 30px;
+    width: 353px;
+    height: 191px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box; /* важно, чтобы padding не увеличивал общий размер */
+}
+
+/* Стилизация фона (backdrop) */
+.modal-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(3px);
+}
+
+/* Две колонки — размещаем горизонтально, выравниваем по центру */
+.modal__columns {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* уменьшим gap, чтобы всё влезло в 191px высоты */
+    height: 100%; /* займёт всю высоту окна с учётом padding */
+}
+
+.modal__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal__icon .save-icon {
+    width: 60px; /* уменьшим иконку для лучшего вписывания */
+    height: 60px;
+}
+
+.modal__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.modal__text {
+    font-family: var(--accent-font), sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    text-transform: uppercase;
+    color: #000;
+}
+
+.modal__close-btn {
+    min-width: 80px;
+    justify-content: center;
+    padding-block: 6px;
+    padding-inline: 12px;
+}
+
+
+.save-memory-btn {
+    background-color: #ffffff;
+    white-space: nowrap;
+    border: 2px solid #000;
+    padding-block: 15px;
+    padding-inline: 20px;
+    width: 335px;
+    height: 55px;
+
+}
+
+@media (max-width: 500px) {
+    .save-memory-btn {
+        white-space: normal; /* на узких экранах разрешаем перенос, чтобы не ломался макет */
+        font-size: 12px;
+        padding-inline: 12px;
+    }
+}
+
+@media (width <= 375px) {
+    /* Шапка на всю ширину, высота блока остаётся 368px */
+    .header__content {
+        width: 100%;
+        height: 327px;
+        margin: 100px 0 0 0;
+    }
+
+    .extra-button-container {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin: 20px 0 40px;
+    }
+
+    .save-memory-btn {
+        display: flex;
+        flex-direction: column; /* иконка сверху, текст снизу */
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        height: auto; /* отменяем фиксированную высоту 38px */
+        padding: 12px 16px;
+        width: auto;
+        min-width: 140px;
+    }
+
+    .save-memory-btn .save-icon {
+        width: 28px;
+        height: 28px;
+        margin: 0;
+    }
+
+    .save-memory-btn .button__text {
+        font-size: 12px;
+        line-height: 1.2;
+    }
+
+    .card {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
