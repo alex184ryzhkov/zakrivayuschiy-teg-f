@@ -130,7 +130,7 @@ body {
     gap: clamp(12px, 3vw, 20px);
 }
 
-/* Кнопка-обёртка сердечка (имеет оба класса: card__icon-button и card__like-button) */
+
 .card__icon-button {
     background: none;
     border: 2px solid transparent;
