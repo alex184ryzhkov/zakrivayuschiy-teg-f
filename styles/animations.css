@@ -17,15 +17,12 @@
 @keyframes sparks-burst {
     0% {
         opacity: 0;
-        transform: scale(0.8);
     }
     50% {
         opacity: 1;
-        transform: scale(1.2);
     }
     100% {
         opacity: 0;
-        transform: scale(1);
     }
 }
 
@@ -54,7 +51,6 @@
 
 .sparks {
     opacity: 0;
-    transition: opacity 0.3s ease;
 }
 
 /* ----- Состояние наведения (hover) – заливка основного тела и сердцевины ----- */
@@ -66,16 +62,6 @@
 .card__icon-button:hover .main-body {
     fill: var(--contour-color);
     transition-delay: 0.05s;
-}
-
-.card__icon-button:hover .contour {
-    fill: var(--contour-color);
-}
-
-/* ----- Состояние нажатия (active) – масштабирование сердца ----- */
-.card__icon-button:active .heart {
-    transform: scale(1.1);
-    transition: transform 0.1s ease;
 }
 
 /* ----- Состояние лайкнутой иконки (is-liked) ----- */
@@ -95,12 +81,12 @@
 }
 
 .like-icon.is-liked .heart {
-    animation: heart-scale 0.3s ease-in 0.1s forwards;
+    animation: heart-scale 0.3s ease-in 0.1s;
     transform-origin: center;
 }
 
 .like-icon.is-liked .sparks {
-    animation: sparks-burst 0.3s ease-in 0.3s forwards;
+    animation: sparks-burst 0.3s ease-in 0.3s;
 }
 
 .like-icon.is-liked .heart,

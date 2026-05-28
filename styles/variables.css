@@ -4,6 +4,7 @@
 
     --main-font-weight: 410;
     --title-font-weight: 715;
+    --container-width: clamp(320px, 90%, 1200px);
 
     --page-bg-gradient: repeating-linear-gradient(90deg, #d3d3d3 0px, #d3d3d3 2px, transparent 2px, transparent 4px),
     repeating-linear-gradient(180deg, #d3d3d3 0px, #d3d3d3 2px, transparent 2px, transparent 4px),
