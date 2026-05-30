@@ -6,7 +6,10 @@
     }
 }
 
-body {
+/* ---------- Глобальное подавление горизонтальной прокрутки ---------- */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
 }
@@ -15,6 +18,7 @@ body {
 .container {
     width: var(--container-width);
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 /* ---------- Общие стили для страницы ---------- */
@@ -25,6 +29,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow-x: hidden;
 }
 
 /* ---------- Шапка ---------- */
@@ -86,6 +91,7 @@ body {
     overflow: hidden;
     margin-bottom: 50px;
     border: 2px solid #000;
+    box-sizing: border-box; /* важно: учитываем границы в ширине */
 }
 
 .card__title {
@@ -96,8 +102,8 @@ body {
     padding-block: 5px;
     padding-inline: 10px;
     margin: 0;
+    word-break: break-word;
 }
-
 
 .card__image img {
     width: 100%;
@@ -116,6 +122,8 @@ body {
     font-size: 18px;
     line-height: 117%;
     padding: 25px 25px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .card__actions {
@@ -124,17 +132,22 @@ body {
     gap: clamp(12px, 3vw, 20px);
 }
 
-
 .card__icon-button {
     background: none;
     border: 2px solid transparent;
     cursor: pointer;
-    padding: 8px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--text-color);
     transition: transform 0.3s ease, border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.like-icon {
+    width: 36px;
+    height: 36px;
 }
 
 .card__icon-button:focus {
@@ -145,7 +158,6 @@ body {
     border-color: var(--button-hover-bg);
 }
 
-/* Текстовая кнопка Like (классы button и card__like_button) */
 .button {
     background-color: var(--button-bg);
     color: var(--button-text);
@@ -162,6 +174,7 @@ body {
     align-items: center;
     justify-content: center;
     gap: 8px;
+    box-sizing: border-box;
 }
 
 .button__text {
@@ -256,6 +269,7 @@ body {
     display: flex;
     justify-content: center;
     margin-bottom: 100px;
+    padding: 0 16px; /* защита от прилипания к краям */
 }
 
 .save-memory-btn {
@@ -266,6 +280,17 @@ body {
     padding-inline: 20px;
     width: 335px;
     height: 55px;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.save-memory-btn .save-icon {
+    width: 21px;
+    height: 21px;
+    flex-shrink: 0;
 }
 
 /* ---------- Модальное окно ---------- */
@@ -273,39 +298,31 @@ body {
     border: 2px solid #000;
     padding: 30px;
     max-width: 353px;
+    width: calc(100% - 32px);
     background-color: #fff;
     box-sizing: border-box;
+    margin: auto;
 }
 
 .modal-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.75);
 }
 
-.modal__columns {
+/* Верхний блок: иконка + текст в строку */
+.modal__top {
     display: flex;
     align-items: center;
     gap: 20px;
-    height: 100%;
+    margin-bottom: 30px; /* отступ перед кнопкой */
 }
 
 .modal__icon {
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .modal__icon .save-icon {
     width: 60px;
     height: 60px;
-}
-
-.modal__content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
 }
 
 .modal__text {
@@ -315,13 +332,57 @@ body {
     line-height: 150%;
     text-transform: uppercase;
     color: #000;
+    margin: 0;
+    word-break: break-word;
+}
+
+/* Нижний блок: кнопка под иконкой и текстом */
+.modal__bottom {
+    width: 100%;
 }
 
 .modal__close-btn {
-    min-width: 80px;
+    width: 100%; /* кнопка растягивается на всю ширину модалки */
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding-block: 6px;
-    padding-inline: 12px;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 2px solid var(--text-color);
+    padding: 12px 20px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.modal__close-btn .button__text {
+    font-family: var(--accent-font), sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+/* Эффект hover (как у других кнопок) */
+.modal__close-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--button-hover-bg);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease-in-out;
+    z-index: 0;
+}
+
+.modal__close-btn:hover::before {
+    transform: translateX(0);
+}
+
+.modal__close-btn:focus {
+    outline: none;
+    box-shadow: var(--button-focus-shadow);
 }
 
 /* Фильтры изображений */
@@ -357,11 +418,29 @@ body {
     filter: brightness(1.1) sepia(0.2) blur(0.4px);
 }
 
+/* ========== АДАПТИВНОСТЬ ========== */
+
+/* Для экранов уже 700px и меньше — карточка становится резиновой */
+@media (max-width: 700px) {
+    .card {
+        width: calc(100% - 32px);
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .container {
+        width: calc(100% - 32px);
+    }
+}
+
 @media (max-width: 500px) {
     .save-memory-btn {
         white-space: normal;
         font-size: 12px;
         padding-inline: 12px;
+        width: auto;
+        min-width: 260px;
     }
 }
 
@@ -373,11 +452,11 @@ body {
     }
 
     .logo {
-        font-size: clamp(1.75rem, 10vw, 4.0625rem);
+        font-size: 49px;
     }
 
     .header__title {
-        font-size: clamp(1rem, 5vw, 1.4375rem);
+        font-size: 14px;
     }
 
     .extra-button-container {
@@ -397,7 +476,7 @@ body {
         min-height: 84px;
         padding: 12px 16px;
         width: auto;
-        min-width: 306px;
+        min-width: 280px;
     }
 
     .save-memory-btn .save-icon {
@@ -409,5 +488,10 @@ body {
     .card {
         width: 100%;
         max-width: 100%;
+    }
+
+    .modal-dialog {
+        width: calc(100% - 32px);
+        padding: 20px;
     }
 }

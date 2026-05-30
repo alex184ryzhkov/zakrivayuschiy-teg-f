@@ -42,7 +42,7 @@
                 <div class="card__buttons-group">
                     <!-- Кнопка-обёртка для иконки сердца -->
                     <button class="card__icon-button" type="button">
-                        <svg class="like-icon" width="39" height="36" viewBox="0 0 39 36" fill="none"
+                        <svg class="like-icon" width="36" height="36" viewBox="0 0 39 36" fill="none"
                              xmlns="http://www.w3.org/2000/svg">
                             <g class="heart">
                                 <path class="contour"
@@ -403,7 +403,7 @@
     <!-- Дополнительная кнопка после карточек -->
     <div class="extra-button-container">
         <button class="button save-memory-btn js-open-dialog" type="button">
-            <svg class="save-icon" width="25" height="25" viewBox="0 0 42 42">
+            <svg class="save-icon" viewBox="0 0 42 42">
                 <use href="./svg/floppy.svg#floppy"/>
             </svg>
             <span class="button__text">Сохранить на память</span>
@@ -412,16 +412,16 @@
 
     <!-- Модальное окно (dialog) -->
     <dialog class="modal-dialog" id="memory-dialog">
-        <div class="modal__columns">
+        <div class="modal__top">
             <svg class="modal__icon save-icon" width="39" height="39" viewBox="0 0 42 42">
                 <use href="./svg/floppy.svg#floppy"/>
             </svg>
-            <div class="modal__content">
-                <p class="modal__text">Вставьте дискету, чтобы продолжить</p>
-                <button class="button modal__close-btn js-close-dialog" type="button">
-                    <span class="button__text">ok</span>
-                </button>
-            </div>
+            <p class="modal__text">Вставьте дискету, чтобы продолжить</p>
+        </div>
+        <div class="modal__bottom">
+            <button class="button modal__close-btn js-close-dialog" type="button">
+                <span class="button__text">ok</span>
+            </button>
         </div>
     </dialog>
 </main>
