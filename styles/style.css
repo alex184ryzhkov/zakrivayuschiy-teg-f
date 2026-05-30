@@ -186,9 +186,6 @@ html, body {
     color: inherit;
 }
 
-.modal__close-btn .button__text {
-    text-transform: uppercase;
-}
 
 .save-icon {
     color: var(--text-color, #000);
@@ -357,6 +354,7 @@ html, body {
 }
 
 .modal__close-btn .button__text {
+    text-transform: uppercase;
     font-family: var(--accent-font), sans-serif;
     font-weight: 400;
     font-size: 14px;
