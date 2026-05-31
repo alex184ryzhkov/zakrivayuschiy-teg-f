@@ -26,16 +26,6 @@
     }
 }
 
-/* Анимация заливки основного тела и сердцевины (плавное появление цвета) */
-@keyframes fill-heart {
-    0% {
-        fill: transparent;
-    }
-    100% {
-        fill: var(--animation-fill-color);
-    }
-}
-
 /* ----- Базовые переходы для элементов сердца ----- */
 .contour {
     transition: fill 0.1s linear;
@@ -60,6 +50,16 @@
 }
 
 .card__icon-button:hover .main-body {
+    fill: var(--contour-color);
+    transition-delay: 0.05s;
+}
+
+.card__icon-button:active .core {
+    fill: var(--contour-color);
+    transition-delay: 0s;
+}
+
+.card__icon-button:active .main-body {
     fill: var(--contour-color);
     transition-delay: 0.05s;
 }
